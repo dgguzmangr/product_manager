@@ -9,7 +9,7 @@ class ProductSerializer(serializers.ModelSerializer):
             'sku',
             'name',
             'short_description',
-            'long_description'
+            'long_description',
             'footprint',
             'price',
             'discount',

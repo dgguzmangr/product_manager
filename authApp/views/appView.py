@@ -61,7 +61,7 @@ def show_product_prices(request, pk):
         product = Product.objects.get(pk=pk)
     except Product.DoesNotExist:
         return Response({"error": "Product not found"}, status=status.HTTP_404_NOT_FOUND)
-    prices = Price.objects.filter(product_id=product)
+    prices = Price.objects.filter(product=product)
     serializer = PriceSerializer(prices, many=True)
     return Response(serializer.data, status=status.HTTP_200_OK)
 
@@ -73,7 +73,7 @@ def show_product_footprint(request, pk):
         return Response({"error": "Product not found"}, status=status.HTTP_404_NOT_FOUND)
 
     try:
-        footprint = Footprint.objects.get(product_id=product)
+        footprint = Footprint.objects.get(product=product)
     except Footprint.DoesNotExist:
         return Response({"error": "Footprint not found"}, status=status.HTTP_404_NOT_FOUND)
     
@@ -87,7 +87,7 @@ def show_product_discounts(request, pk):
     except Product.DoesNotExist:
         return Response({"error": "Product not found"}, status=status.HTTP_404_NOT_FOUND)
 
-    discounts = Discount.objects.filter(product_id=product)
+    discounts = Discount.objects.filter(product=product)
     serializer = DiscountSerializer(discounts, many=True)
     return Response(serializer.data, status=status.HTTP_200_OK)
 
@@ -98,10 +98,9 @@ def show_product_taxes(request, pk):
     except Product.DoesNotExist:
         return Response({"error": "Product not found"}, status=status.HTTP_404_NOT_FOUND)
 
-    taxes = Tax.objects.filter(products=product)
+    taxes = Tax.objects.filter(product=product)
     serializer = TaxSerializer(taxes, many=True)
     return Response(serializer.data, status=status.HTTP_200_OK)
-
 
 # Footprint API
 
