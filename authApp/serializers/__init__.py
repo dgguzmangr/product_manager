@@ -2,3 +2,4 @@ from authApp.serializers.productSerializer import ProductSerializer
 from authApp.serializers.footprintSerializer import FootprintSerializer
 from authApp.serializers.priceSerializer import PriceSerializer
 from authApp.serializers.discountSerializer import DiscountSerializer
+from authApp.serializers.taxSerializer import TaxSerializer

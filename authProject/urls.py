@@ -51,6 +51,7 @@ urlpatterns = [
     path('show-product-prices/<int:pk>/', appView.show_product_prices),
     path('show-product-footprint/<int:pk>/', appView.show_product_footprint),
     path('show-product-discounts/<int:pk>/', appView.show_product_discounts),
+    path('show-product-taxes/<int:pk>/', appView.show_product_taxes),
 
     # footprint urls
     path('show-footprints/', appView.show_footprints),
@@ -69,6 +70,12 @@ urlpatterns = [
     path('create-discount/', appView.create_discount),
     path('update-discount/<int:pk>/', appView.update_discount),
     path('delete-discount/<int:pk>/', appView.delete_discount),
+
+    # Tax urls
+    path('show-taxes/', appView.show_taxes),
+    path('create-tax/', appView.create_tax),
+    path('update-tax/<int:pk>/', appView.update_tax),
+    path('delete-tax/<int:pk>/', appView.delete_tax),
 ]
 
 # http://localhost:8000/swagger/

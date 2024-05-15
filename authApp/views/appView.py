@@ -6,10 +6,12 @@ from authApp.models.product import Product
 from authApp.models.footprint import Footprint
 from authApp.models.price import Price
 from authApp.models.discount import Discount
+from authApp.models.tax import Tax
 from authApp.serializers.productSerializer import ProductSerializer
 from authApp.serializers.footprintSerializer import FootprintSerializer
 from authApp.serializers.priceSerializer import PriceSerializer
 from authApp.serializers.discountSerializer import DiscountSerializer
+from authApp.serializers.taxSerializer import TaxSerializer
 
 # Product API
 
@@ -88,6 +90,18 @@ def show_product_discounts(request, pk):
     discounts = Discount.objects.filter(product_id=product)
     serializer = DiscountSerializer(discounts, many=True)
     return Response(serializer.data, status=status.HTTP_200_OK)
+
+@api_view(['GET'])
+def show_product_taxes(request, pk):
+    try:
+        product = Product.objects.get(pk=pk)
+    except Product.DoesNotExist:
+        return Response({"error": "Product not found"}, status=status.HTTP_404_NOT_FOUND)
+
+    taxes = Tax.objects.filter(products=product)
+    serializer = TaxSerializer(taxes, many=True)
+    return Response(serializer.data, status=status.HTTP_200_OK)
+
 
 # Footprint API
 
@@ -213,4 +227,46 @@ def delete_discount(request, pk):
         return Response({"error": "Discount not found"}, status=status.HTTP_404_NOT_FOUND)
     if request.method == 'DELETE':
         discount.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
+# Tax API
+
+@api_view(['GET'])
+def show_taxes(request):
+    if request.method == 'GET':
+        tax = Tax.objects.all()
+        serializer = TaxSerializer(tax, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+@api_view(['POST'])
+def create_tax(request):
+    if request.method == 'POST':
+        serializer = TaxSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['PUT'])
+def update_tax(request, pk):
+    try:
+        tax = Tax.objects.get(pk=pk)
+    except Tax.DoesNotExist:
+        return Response({"error": "Tax not found"}, status=status.HTTP_404_NOT_FOUND)
+
+    if request.method == 'PUT':
+        serializer = TaxSerializer(tax, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['DELETE'])
+def delete_tax(request, pk):
+    try:
+        tax = Tax.objects.get(pk=pk)
+    except Tax.DoesNotExist:
+        return Response({"error": "Tax not found"}, status=status.HTTP_404_NOT_FOUND)
+    if request.method == 'DELETE':
+        tax.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)

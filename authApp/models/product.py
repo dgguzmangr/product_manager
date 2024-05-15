@@ -2,6 +2,7 @@ from django.db import models
 from .footprint import Footprint
 from .price import Price
 from .discount import Discount
+from .tax import Tax
 import uuid
 
 class Product(models.Model):
@@ -13,6 +14,7 @@ class Product(models.Model):
     footprint = models.OneToOneField(Footprint, on_delete=models.CASCADE, related_name='product')
     price = models.ForeignKey(Price, on_delete=models.CASCADE, related_name='product')
     discount = models.ForeignKey(Discount, on_delete=models.CASCADE, related_name='product')
+    tax = models.ForeignKey(Tax, on_delete=models.CASCADE, related_name='product')
 
     class Meta:
         app_label = 'authApp'

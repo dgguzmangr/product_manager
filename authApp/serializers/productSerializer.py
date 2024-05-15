@@ -11,8 +11,9 @@ class ProductSerializer(serializers.ModelSerializer):
             'short_description',
             'long_description'
             'footprint',
-            'price'
-            'discount'
+            'price',
+            'discount',
+            'tax'
             ]
         read_only_fields = [
             'product_id',
