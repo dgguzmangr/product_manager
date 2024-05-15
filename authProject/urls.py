@@ -21,6 +21,7 @@ from django.conf.urls.static import static
 # from rest_framework_simplejwt.views import (TokenObtainPairView, TokenRefreshView)
 # from rest_framework.authtoken import views
 from authApp.views import appView
+from authApp.views import businessModelView
 from rest_framework import permissions
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
@@ -76,6 +77,9 @@ urlpatterns = [
     path('create-tax/', appView.create_tax),
     path('update-tax/<int:pk>/', appView.update_tax),
     path('delete-tax/<int:pk>/', appView.delete_tax),
+
+    # Business Model url
+    path('field-structure-view/', businessModelView.field_structure_view)
 ]
 
 # http://localhost:8000/swagger/
