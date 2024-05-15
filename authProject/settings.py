@@ -60,6 +60,7 @@ INSTALLED_APPS = [
     'authApp',
     'drf_yasg',
     'corsheaders',
+    'djmoney',
 ]
 
 

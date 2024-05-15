@@ -1,5 +1,4 @@
 from django.db import models
-from .product import Product
 
 class Footprint(models.Model):
     UNITS = [
@@ -27,7 +26,6 @@ class Footprint(models.Model):
     width = models.DecimalField('Width', max_digits=10, decimal_places=3, blank=False, null=False)
     weight = models.DecimalField('Weight', max_digits=10, decimal_places=3, blank=False, null=False)
     volume = models.DecimalField('Volume', max_digits=10, decimal_places=3, blank=True, null=True)
-    product_id = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='footprint')
 
     def save(self, *args, **kwargs):
         self.volume = self.long * self.high * self.width

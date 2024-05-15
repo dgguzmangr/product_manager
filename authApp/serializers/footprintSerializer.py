@@ -13,7 +13,7 @@ class FootprintSerializer(serializers.ModelSerializer):
             'weight', 
             'volume'
             ]
-        read_only_fields = ['volume']
+        read_only_fields = ['footprint_id, volume']
 
         def validate(self, data):
             if data.get('long') <= 0 or data.get('high') <= 0 or data.get('width') <= 0:

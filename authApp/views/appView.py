@@ -4,8 +4,10 @@ from rest_framework import status
 
 from authApp.models.product import Product
 from authApp.models.footprint import Footprint
+from authApp.models.price import Price
 from authApp.serializers.productSerializer import ProductSerializer
 from authApp.serializers.footprintSerializer import FootprintSerializer
+from authApp.serializers.priceSerializer import PriceSerializer
 
 # Product API
 
@@ -89,4 +91,46 @@ def delete_footprint(request, pk):
         return Response({"error": "Footprint not found"}, status=status.HTTP_404_NOT_FOUND)
     if request.method == 'DELETE':
         footprint.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
+# Price API
+
+@api_view(['GET'])
+def show_prices(request):
+    if request.method == 'GET':
+        price = Price.objects.all()
+        serializer = PriceSerializer(price, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+@api_view(['POST'])
+def create_price(request):
+    if request.method == 'POST':
+        serializer = PriceSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['PUT'])
+def update_price(request, pk):
+    try:
+        price = Price.objects.get(pk=pk)
+    except Price.DoesNotExist:
+        return Response({"error": "Price not found"}, status=status.HTTP_404_NOT_FOUND)
+
+    if request.method == 'PUT':
+        serializer = PriceSerializer(price, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['DELETE'])
+def delete_price(request, pk):
+    try:
+        Price = Price.objects.get(pk=pk)
+    except Price.DoesNotExist:
+        return Response({"error": "Price not found"}, status=status.HTTP_404_NOT_FOUND)
+    if request.method == 'DELETE':
+        print.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)

@@ -11,7 +11,7 @@ class ProductSerializer(serializers.ModelSerializer):
             'short_description',
             'long_description'
             ]
-        read_only_fields = ['sku']
+        read_only_fields = ['product_id, sku']
 
         def validate(self, data):
             if len(data.get('name', '')) > 100:

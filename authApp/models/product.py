@@ -1,4 +1,6 @@
 from django.db import models
+from .footprint import Footprint
+from .price import Price
 import uuid
 
 class Product(models.Model):
@@ -7,6 +9,8 @@ class Product(models.Model):
     name = models.CharField('Name', max_length=100, blank=False, null=False)
     short_description = models.CharField('Short description', max_length=30, blank=False, null=False)
     long_description = models.CharField('Long description', max_length=100, blank=False, null=False)
+    footprint = models.OneToOneField(Footprint, on_delete=models.CASCADE, related_name='product')
+    price = models.ForeignKey(Price, on_delete=models.CASCADE, related_name='product')
 
     class Meta:
         app_label = 'authApp'

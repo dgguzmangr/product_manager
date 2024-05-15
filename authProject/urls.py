@@ -54,6 +54,12 @@ urlpatterns = [
     path('create-footprint/', appView.create_footprint),
     path('update-footprint/<int:pk>/', appView.update_footprint),
     path('delete-footprint/<int:pk>/', appView.delete_footprint),
+
+    # price urls
+    path('show-price/', appView.show_prices),
+    path('create-price/', appView.create_price),
+    path('update-price/<int:pk>/', appView.update_price),
+    path('delete-price/<int:pk>/', appView.delete_price),
 ]
 
 # http://localhost:8000/swagger/
