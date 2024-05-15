@@ -15,13 +15,16 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
-from rest_framework_simplejwt.views import (TokenObtainPairView, TokenRefreshView)
-from rest_framework.authtoken import views
-
+from django.urls import path, include
+from django.conf import settings
+from django.conf.urls.static import static
+# from rest_framework_simplejwt.views import (TokenObtainPairView, TokenRefreshView)
+# from rest_framework.authtoken import views
+from authApp.views import appView
 from rest_framework import permissions
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
+
 
 schema_view = get_schema_view(
     openapi.Info(
@@ -40,6 +43,17 @@ urlpatterns = [
     path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
 
+    # product urls
+    path('show-products/', appView.show_products),
+    path('create-product/', appView.create_product),
+    path('update-product/<int:pk>/', appView.update_product),
+    path('delete-product/<int:pk>/', appView.delete_product),
+
+    # footprint urls
+    path('show-footprints/', appView.show_footprints),
+    path('create-footprint/', appView.create_footprint),
+    path('update-footprint/<int:pk>/', appView.update_footprint),
+    path('delete-footprint/<int:pk>/', appView.delete_footprint),
 ]
 
 # http://localhost:8000/swagger/

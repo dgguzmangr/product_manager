@@ -1,3 +1,4 @@
+"""
 from django.shortcuts import render
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -11,3 +12,4 @@ class MyAPIView(APIView):
         # Código para manejar las solicitudes POST
         return Response({'message': 'POST request processed'})
 # Create your views here.
+"""
