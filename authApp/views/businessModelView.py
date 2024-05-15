@@ -2,6 +2,9 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
 from authApp.serializers import ProductSerializer, DiscountSerializer, FootprintSerializer, PriceSerializer, TaxSerializer
+from rest_framework.authtoken.models import Token # comentar par deshabilitar seguridad
+from django.contrib.auth.forms import AuthenticationForm # comentar par deshabilitar seguridad
+from django.contrib.auth import login as auth_login # comentar par deshabilitar seguridad
 
 @api_view(['GET'])
 def field_structure_view(request):
@@ -11,14 +14,12 @@ def field_structure_view(request):
     price_serializer = PriceSerializer()
     tax_serializer = TaxSerializer()
 
-    # Obtener los campos y atributos de cada serializador
     product_fields = get_serializer_fields_info(product_serializer)
     discount_fields = get_serializer_fields_info(discount_serializer)
     footprint_fields = get_serializer_fields_info(footprint_serializer)
     price_fields = get_serializer_fields_info(price_serializer)
     tax_fields = get_serializer_fields_info(tax_serializer)
 
-    # Estructura final con la información de los campos
     field_structure = {
         'product': product_fields,
         'discount': discount_fields,
@@ -33,7 +34,6 @@ def field_structure_view(request):
 def get_serializer_fields_info(serializer):
     fields_info = {}
 
-    # Iterar sobre cada campo del serializador
     for field_name, field in serializer.fields.items():
         field_info = {
             'required': field.required,
@@ -54,12 +54,10 @@ def get_serializer_fields_info(serializer):
 def get_field_validations(field):
     validations = []
 
-    # Validaciones de longitud máxima
     max_length = getattr(field, 'max_length', None)
     if max_length is not None:
         validations.append(f"Max length: {max_length}")
 
-    # Validaciones numéricas
     max_value = getattr(field, 'max_value', None)
     if max_value is not None:
         validations.append(f"Max value: {max_value}")
@@ -68,7 +66,6 @@ def get_field_validations(field):
     if min_value is not None:
         validations.append(f"Min value: {min_value}")
 
-    # Otras validaciones personalizadas
     validators = getattr(field, 'validators', None)
     if validators:
         for validator in validators:

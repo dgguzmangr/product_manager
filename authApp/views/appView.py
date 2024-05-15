@@ -12,6 +12,9 @@ from authApp.serializers.footprintSerializer import FootprintSerializer
 from authApp.serializers.priceSerializer import PriceSerializer
 from authApp.serializers.discountSerializer import DiscountSerializer
 from authApp.serializers.taxSerializer import TaxSerializer
+from rest_framework.authtoken.models import Token # comentar par deshabilitar seguridad
+from django.contrib.auth.forms import AuthenticationForm # comentar par deshabilitar seguridad
+from django.contrib.auth import login as auth_login # comentar par deshabilitar seguridad
 
 # Product API
 
@@ -269,3 +272,14 @@ def delete_tax(request, pk):
     if request.method == 'DELETE':
         tax.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+@api_view(['POST'])
+def login(request):
+    if request.method == 'POST':
+        form = AuthenticationForm(data=request.data)
+        if form.is_valid():
+            user = form.get_user()
+            auth_login(request, user)
+            token, _ = Token.objects.get_or_create(user=user)
+            return Response({"token": token.key}, status=status.HTTP_200_OK)
+        return Response({"error": "Invalid username or password"}, status=status.HTTP_400_BAD_REQUEST)

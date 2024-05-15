@@ -18,8 +18,8 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-# from rest_framework_simplejwt.views import (TokenObtainPairView, TokenRefreshView)
-# from rest_framework.authtoken import views
+from rest_framework_simplejwt.views import (TokenObtainPairView, TokenRefreshView) # comentar par deshabilitar seguridad
+from rest_framework.authtoken import views
 from authApp.views import appView
 from authApp.views import businessModelView
 from rest_framework import permissions
@@ -79,7 +79,13 @@ urlpatterns = [
     path('delete-tax/<int:pk>/', appView.delete_tax),
 
     # Business Model url
-    path('field-structure-view/', businessModelView.field_structure_view)
+    path('field-structure-view/', businessModelView.field_structure_view),
+
+    # token
+    path('generate_token/', views.obtain_auth_token),
+
+    #login
+    path('login/', appView.login),
 ]
 
 # http://localhost:8000/swagger/
