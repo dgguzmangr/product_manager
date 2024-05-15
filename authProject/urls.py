@@ -48,6 +48,9 @@ urlpatterns = [
     path('create-product/', appView.create_product),
     path('update-product/<int:pk>/', appView.update_product),
     path('delete-product/<int:pk>/', appView.delete_product),
+    path('show-product-prices/<int:pk>/', appView.show_product_prices),
+    path('show-product-footprint/<int:pk>/', appView.show_product_footprint),
+    path('show-product-discounts/<int:pk>/', appView.show_product_discounts),
 
     # footprint urls
     path('show-footprints/', appView.show_footprints),
@@ -56,10 +59,16 @@ urlpatterns = [
     path('delete-footprint/<int:pk>/', appView.delete_footprint),
 
     # price urls
-    path('show-price/', appView.show_prices),
+    path('show-prices/', appView.show_prices),
     path('create-price/', appView.create_price),
     path('update-price/<int:pk>/', appView.update_price),
     path('delete-price/<int:pk>/', appView.delete_price),
+
+    # Discount urls
+    path('show-discounts/', appView.show_discounts),
+    path('create-discount/', appView.create_discount),
+    path('update-discount/<int:pk>/', appView.update_discount),
+    path('delete-discount/<int:pk>/', appView.delete_discount),
 ]
 
 # http://localhost:8000/swagger/

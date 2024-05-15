@@ -1,6 +1,7 @@
 from django.db import models
 from .footprint import Footprint
 from .price import Price
+from .discount import Discount
 import uuid
 
 class Product(models.Model):
@@ -11,6 +12,7 @@ class Product(models.Model):
     long_description = models.CharField('Long description', max_length=100, blank=False, null=False)
     footprint = models.OneToOneField(Footprint, on_delete=models.CASCADE, related_name='product')
     price = models.ForeignKey(Price, on_delete=models.CASCADE, related_name='product')
+    discount = models.ForeignKey(Discount, on_delete=models.CASCADE, related_name='product')
 
     class Meta:
         app_label = 'authApp'

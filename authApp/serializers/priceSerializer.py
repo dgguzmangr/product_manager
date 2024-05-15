@@ -10,11 +10,14 @@ class PriceSerializer(serializers.ModelSerializer):
             'date',
             'status'
         ]
-    read_only_fields = ['price_id, date']
+    read_only_fields = [
+        'price_id', 
+        'date'
+        ]
 
     def validate(self, data):
             if data.get('amount') <= 0:
-                raise serializers.ValidationError("The price, value must be positive.")
+                raise serializers.ValidationError("The amount, value must be positive.")
             return data
 
 

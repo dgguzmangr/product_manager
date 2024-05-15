@@ -5,9 +5,11 @@ from rest_framework import status
 from authApp.models.product import Product
 from authApp.models.footprint import Footprint
 from authApp.models.price import Price
+from authApp.models.discount import Discount
 from authApp.serializers.productSerializer import ProductSerializer
 from authApp.serializers.footprintSerializer import FootprintSerializer
 from authApp.serializers.priceSerializer import PriceSerializer
+from authApp.serializers.discountSerializer import DiscountSerializer
 
 # Product API
 
@@ -50,6 +52,42 @@ def delete_product(request, pk):
     if request.method == 'DELETE':
         product.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+@api_view(['GET'])
+def show_product_prices(request, pk):
+    try:
+        product = Product.objects.get(pk=pk)
+    except Product.DoesNotExist:
+        return Response({"error": "Product not found"}, status=status.HTTP_404_NOT_FOUND)
+    prices = Price.objects.filter(product_id=product)
+    serializer = PriceSerializer(prices, many=True)
+    return Response(serializer.data, status=status.HTTP_200_OK)
+
+@api_view(['GET'])
+def show_product_footprint(request, pk):
+    try:
+        product = Product.objects.get(pk=pk)
+    except Product.DoesNotExist:
+        return Response({"error": "Product not found"}, status=status.HTTP_404_NOT_FOUND)
+
+    try:
+        footprint = Footprint.objects.get(product_id=product)
+    except Footprint.DoesNotExist:
+        return Response({"error": "Footprint not found"}, status=status.HTTP_404_NOT_FOUND)
+    
+    serializer = FootprintSerializer(footprint)
+    return Response(serializer.data, status=status.HTTP_200_OK)
+
+@api_view(['GET'])
+def show_product_discounts(request, pk):
+    try:
+        product = Product.objects.get(pk=pk)
+    except Product.DoesNotExist:
+        return Response({"error": "Product not found"}, status=status.HTTP_404_NOT_FOUND)
+
+    discounts = Discount.objects.filter(product_id=product)
+    serializer = DiscountSerializer(discounts, many=True)
+    return Response(serializer.data, status=status.HTTP_200_OK)
 
 # Footprint API
 
@@ -128,9 +166,51 @@ def update_price(request, pk):
 @api_view(['DELETE'])
 def delete_price(request, pk):
     try:
-        Price = Price.objects.get(pk=pk)
+        price = Price.objects.get(pk=pk)
     except Price.DoesNotExist:
         return Response({"error": "Price not found"}, status=status.HTTP_404_NOT_FOUND)
     if request.method == 'DELETE':
         print.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
+# Discount API
+
+@api_view(['GET'])
+def show_discounts(request):
+    if request.method == 'GET':
+        discount = Discount.objects.all()
+        serializer = DiscountSerializer(discount, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+@api_view(['POST'])
+def create_discount(request):
+    if request.method == 'POST':
+        serializer = DiscountSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['PUT'])
+def update_discount(request, pk):
+    try:
+        discount = Discount.objects.get(pk=pk)
+    except Discount.DoesNotExist:
+        return Response({"error": "Discount not found"}, status=status.HTTP_404_NOT_FOUND)
+
+    if request.method == 'PUT':
+        serializer = DiscountSerializer(discount, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['DELETE'])
+def delete_discount(request, pk):
+    try:
+        discount = Discount.objects.get(pk=pk)
+    except Discount.DoesNotExist:
+        return Response({"error": "Discount not found"}, status=status.HTTP_404_NOT_FOUND)
+    if request.method == 'DELETE':
+        discount.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
