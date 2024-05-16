@@ -58,5 +58,6 @@ python manage.py runserver
 ## Uso
 
 Abre tu navegador web y accede a
+- http://localhost:8000/redoc/
 - http://localhost:8000/swagger/
 - http://127.0.0.1:8000/admin/
