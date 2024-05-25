@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from authApp.models.price import Price
+from djmoney.money import Money
 
 class PriceSerializer(serializers.ModelSerializer):
     class Meta:
@@ -9,16 +10,16 @@ class PriceSerializer(serializers.ModelSerializer):
             'amount',
             'date',
             'status'
-        ]
-    read_only_fields = [
-        'price_id', 
-        'date'
-        ]
+            ]
+        read_only_fields = [
+            'price_id', 
+            'date'
+            ]
 
-    def validate(self, data):
-            if data.get('amount') <= 0:
-                raise serializers.ValidationError("The amount, value must be positive.")
-            return data
+    def validate_amount(self, value):
+        if value.amount <= 0:
+            raise serializers.ValidationError("The amount must be positive.")
+        return value
 
 
 

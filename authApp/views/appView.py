@@ -1,6 +1,7 @@
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
+from djmoney.money import Money
 
 from authApp.models.product import Product
 from authApp.models.footprint import Footprint
@@ -159,7 +160,13 @@ def show_prices(request):
 @api_view(['POST'])
 def create_price(request):
     if request.method == 'POST':
-        serializer = PriceSerializer(data=request.data)
+        data = request.data
+        amount = Money(data.get('amount'), data.get('currency'))
+        price_data = {
+            'amount': amount,
+            'status': data.get('status')
+            }
+        serializer = PriceSerializer(data=price_data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -186,7 +193,7 @@ def delete_price(request, pk):
     except Price.DoesNotExist:
         return Response({"error": "Price not found"}, status=status.HTTP_404_NOT_FOUND)
     if request.method == 'DELETE':
-        print.delete()
+        price.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 # Discount API
