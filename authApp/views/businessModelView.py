@@ -2,10 +2,22 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
 from authApp.serializers import ProductSerializer, DiscountSerializer, FootprintSerializer, PriceSerializer, TaxSerializer
-from rest_framework.authtoken.models import Token # comentar par deshabilitar seguridad
-from django.contrib.auth.forms import AuthenticationForm # comentar par deshabilitar seguridad
-from django.contrib.auth import login as auth_login # comentar par deshabilitar seguridad
+from rest_framework.authtoken.models import Token  # comentar para deshabilitar seguridad
+from django.contrib.auth.forms import AuthenticationForm  # comentar para deshabilitar seguridad
+from django.contrib.auth import login as auth_login  # comentar para deshabilitar seguridad
+from drf_yasg.utils import swagger_auto_schema
+from drf_yasg import openapi
 
+@swagger_auto_schema(method='get', responses={200: openapi.Response('Field structure', openapi.Schema(
+    type=openapi.TYPE_OBJECT,
+    properties={
+        'product': openapi.Schema(type=openapi.TYPE_OBJECT),
+        'discount': openapi.Schema(type=openapi.TYPE_OBJECT),
+        'footprint': openapi.Schema(type=openapi.TYPE_OBJECT),
+        'price': openapi.Schema(type=openapi.TYPE_OBJECT),
+        'tax': openapi.Schema(type=openapi.TYPE_OBJECT),
+    }
+))})
 @api_view(['GET'])
 def field_structure_view(request):
     product_serializer = ProductSerializer()
