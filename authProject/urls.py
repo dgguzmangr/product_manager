@@ -77,4 +77,6 @@ urlpatterns = [
     path('login/', appView.login),
 ]
 
+# http://localhost:8000/admin/
 # http://localhost:8000/swagger/
+# http://localhost:8000/redoc/

@@ -17,7 +17,7 @@ from drf_yasg import openapi
         'price': openapi.Schema(type=openapi.TYPE_OBJECT),
         'tax': openapi.Schema(type=openapi.TYPE_OBJECT),
     }
-))})
+))}, tags=['Field structure view'])
 @api_view(['GET'])
 def field_structure_view(request):
     product_serializer = ProductSerializer()

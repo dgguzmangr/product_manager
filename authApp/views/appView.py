@@ -21,7 +21,7 @@ from django.contrib.auth import login as auth_login # comentar par deshabilitar 
 
 # Product API
 
-@swagger_auto_schema(method='get', responses={200: ProductSerializer(many=True)})
+@swagger_auto_schema(method='get', responses={200: ProductSerializer(many=True)} , tags=['Product'])
 @api_view(['GET'])
 def show_products(request):
     if request.method == 'GET':
@@ -29,7 +29,7 @@ def show_products(request):
         serializer = ProductSerializer(product, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
-@swagger_auto_schema(method='post', request_body=ProductSerializer, responses={201: ProductSerializer})
+@swagger_auto_schema(method='post', request_body=ProductSerializer, responses={201: ProductSerializer}, tags=['Product'])
 @api_view(['POST'])
 def create_product(request):
     if request.method == 'POST':
@@ -39,7 +39,7 @@ def create_product(request):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-@swagger_auto_schema(method='put', request_body=ProductSerializer, responses={200: ProductSerializer})
+@swagger_auto_schema(method='put', request_body=ProductSerializer, responses={200: ProductSerializer}, tags=['Product'])
 @api_view(['PUT'])
 def update_product(request, pk):
     try:
@@ -54,7 +54,7 @@ def update_product(request, pk):
             return Response(serializer.data, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-@swagger_auto_schema(method='patch', request_body=ProductSerializer, responses={200: ProductSerializer})
+@swagger_auto_schema(method='patch', request_body=ProductSerializer, responses={200: ProductSerializer}, tags=['Product'])
 @api_view(['PATCH'])
 def partial_update_product(request, pk):
     try:
@@ -69,7 +69,7 @@ def partial_update_product(request, pk):
             return Response(serializer.data, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-@swagger_auto_schema(method='delete', responses={204: 'No Content'})
+@swagger_auto_schema(method='delete', responses={204: 'No Content'}, tags=['Product'])
 @api_view(['DELETE'])
 def delete_product(request, pk):
     try:
@@ -80,7 +80,7 @@ def delete_product(request, pk):
         product.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
-@swagger_auto_schema(method='get', responses={200: PriceSerializer(many=True)})
+@swagger_auto_schema(method='get', responses={200: PriceSerializer(many=True)}, tags=['Product'])
 @api_view(['GET'])
 def show_product_prices(request, pk):
     try:
@@ -91,7 +91,7 @@ def show_product_prices(request, pk):
     serializer = PriceSerializer(prices, many=True)
     return Response(serializer.data, status=status.HTTP_200_OK)
 
-@swagger_auto_schema(method='get', responses={200: FootprintSerializer})
+@swagger_auto_schema(method='get', responses={200: FootprintSerializer}, tags=['Product'])
 @api_view(['GET'])
 def show_product_footprint(request, pk):
     try:
@@ -107,7 +107,7 @@ def show_product_footprint(request, pk):
     serializer = FootprintSerializer(footprint)
     return Response(serializer.data, status=status.HTTP_200_OK)
 
-@swagger_auto_schema(method='get', responses={200: DiscountSerializer(many=True)})
+@swagger_auto_schema(method='get', responses={200: DiscountSerializer(many=True)}, tags=['Product'])
 @api_view(['GET'])
 def show_product_discounts(request, pk):
     try:
@@ -119,7 +119,7 @@ def show_product_discounts(request, pk):
     serializer = DiscountSerializer(discounts, many=True)
     return Response(serializer.data, status=status.HTTP_200_OK)
 
-@swagger_auto_schema(method='get', responses={200: TaxSerializer(many=True)})
+@swagger_auto_schema(method='get', responses={200: TaxSerializer(many=True)}, tags=['Product'])
 @api_view(['GET'])
 def show_product_taxes(request, pk):
     try:
@@ -133,7 +133,7 @@ def show_product_taxes(request, pk):
 
 # Footprint API
 
-@swagger_auto_schema(method='get', responses={200: FootprintSerializer(many=True)})
+@swagger_auto_schema(method='get', responses={200: FootprintSerializer(many=True)}, tags=['Footprint'])
 @api_view(['GET'])
 def show_footprints(request):
     if request.method == 'GET':
@@ -141,7 +141,7 @@ def show_footprints(request):
         serializer = FootprintSerializer(footprint, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
-@swagger_auto_schema(method='post', request_body=FootprintSerializer, responses={201: FootprintSerializer})
+@swagger_auto_schema(method='post', request_body=FootprintSerializer, responses={201: FootprintSerializer}, tags=['Footprint'])
 @api_view(['POST'])
 def create_footprint(request):
     if request.method == 'POST':
@@ -151,7 +151,7 @@ def create_footprint(request):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-@swagger_auto_schema(method='put', request_body=FootprintSerializer, responses={200: FootprintSerializer})
+@swagger_auto_schema(method='put', request_body=FootprintSerializer, responses={200: FootprintSerializer}, tags=['Footprint'])
 @api_view(['PUT'])
 def update_footprint(request, pk):
     try:
@@ -166,7 +166,7 @@ def update_footprint(request, pk):
             return Response(serializer.data, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-@swagger_auto_schema(method='patch', request_body=FootprintSerializer, responses={200: FootprintSerializer})
+@swagger_auto_schema(method='patch', request_body=FootprintSerializer, responses={200: FootprintSerializer}, tags=['Footprint'])
 @api_view(['PATCH'])
 def partial_update_footprint(request, pk):
     try:
@@ -181,7 +181,7 @@ def partial_update_footprint(request, pk):
             return Response(serializer.data, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-@swagger_auto_schema(method='delete', responses={204: 'No Content'})
+@swagger_auto_schema(method='delete', responses={204: 'No Content'}, tags=['Footprint'])
 @api_view(['DELETE'])
 def delete_footprint(request, pk):
     try:
@@ -194,7 +194,7 @@ def delete_footprint(request, pk):
 
 # Price API
 
-@swagger_auto_schema(method='get', responses={200: PriceSerializer(many=True)})
+@swagger_auto_schema(method='get', responses={200: PriceSerializer(many=True)}, tags=['Price'])
 @api_view(['GET'])
 def show_prices(request):
     if request.method == 'GET':
@@ -209,7 +209,7 @@ def show_prices(request):
         'currency': openapi.Schema(type=openapi.TYPE_STRING, description='Currency code'),
         'status': openapi.Schema(type=openapi.TYPE_STRING, description='Status of the price')
     }
-), responses={201: PriceSerializer})
+), responses={201: PriceSerializer}, tags=['Price'])
 @api_view(['POST'])
 def create_price(request):
     if request.method == 'POST':
@@ -225,7 +225,7 @@ def create_price(request):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-@swagger_auto_schema(method='put', request_body=PriceSerializer, responses={200: PriceSerializer})
+@swagger_auto_schema(method='put', request_body=PriceSerializer, responses={200: PriceSerializer}, tags=['Price'])
 @api_view(['PUT'])
 def update_price(request, pk):
     try:
@@ -240,7 +240,7 @@ def update_price(request, pk):
             return Response(serializer.data, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-@swagger_auto_schema(method='patch', request_body=PriceSerializer, responses={200: PriceSerializer})
+@swagger_auto_schema(method='patch', request_body=PriceSerializer, responses={200: PriceSerializer}, tags=['Price'])
 @api_view(['PATCH'])
 def partial_update_price(request, pk):
     try:
@@ -255,7 +255,7 @@ def partial_update_price(request, pk):
             return Response(serializer.data, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-@swagger_auto_schema(method='delete', responses={204: 'No Content'})
+@swagger_auto_schema(method='delete', responses={204: 'No Content'}, tags=['Price'])
 @api_view(['DELETE'])
 def delete_price(request, pk):
     try:
@@ -268,7 +268,7 @@ def delete_price(request, pk):
 
 # Discount API
 
-@swagger_auto_schema(method='get', responses={200: DiscountSerializer(many=True)})
+@swagger_auto_schema(method='get', responses={200: DiscountSerializer(many=True)}, tags=['Discount'])
 @api_view(['GET'])
 def show_discounts(request):
     if request.method == 'GET':
@@ -276,7 +276,7 @@ def show_discounts(request):
         serializer = DiscountSerializer(discount, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
-@swagger_auto_schema(method='post', request_body=DiscountSerializer, responses={201: DiscountSerializer})
+@swagger_auto_schema(method='post', request_body=DiscountSerializer, responses={201: DiscountSerializer}, tags=['Discount'])
 @api_view(['POST'])
 def create_discount(request):
     if request.method == 'POST':
@@ -286,7 +286,7 @@ def create_discount(request):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-@swagger_auto_schema(method='put', request_body=DiscountSerializer, responses={200: DiscountSerializer})
+@swagger_auto_schema(method='put', request_body=DiscountSerializer, responses={200: DiscountSerializer}, tags=['Discount'])
 @api_view(['PUT'])
 def update_discount(request, pk):
     try:
@@ -301,7 +301,7 @@ def update_discount(request, pk):
             return Response(serializer.data, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-@swagger_auto_schema(method='patch', request_body=DiscountSerializer, responses={200: DiscountSerializer})
+@swagger_auto_schema(method='patch', request_body=DiscountSerializer, responses={200: DiscountSerializer}, tags=['Discount'])
 @api_view(['PATCH'])
 def partial_update_discount(request, pk):
     try:
@@ -316,7 +316,7 @@ def partial_update_discount(request, pk):
             return Response(serializer.data, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-@swagger_auto_schema(method='delete', responses={204: 'No Content'})
+@swagger_auto_schema(method='delete', responses={204: 'No Content'}, tags=['Discount'])
 @api_view(['DELETE'])
 def delete_discount(request, pk):
     try:
@@ -329,7 +329,7 @@ def delete_discount(request, pk):
 
 # Tax API
 
-@swagger_auto_schema(method='get', responses={200: TaxSerializer(many=True)})
+@swagger_auto_schema(method='get', responses={200: TaxSerializer(many=True)}, tags=['Tax'])
 @api_view(['GET'])
 def show_taxes(request):
     if request.method == 'GET':
@@ -337,7 +337,7 @@ def show_taxes(request):
         serializer = TaxSerializer(tax, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
-@swagger_auto_schema(method='post', request_body=TaxSerializer, responses={201: TaxSerializer})
+@swagger_auto_schema(method='post', request_body=TaxSerializer, responses={201: TaxSerializer}, tags=['Tax'])
 @api_view(['POST'])
 def create_tax(request):
     if request.method == 'POST':
@@ -347,7 +347,7 @@ def create_tax(request):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-@swagger_auto_schema(method='put', request_body=TaxSerializer, responses={200: TaxSerializer})
+@swagger_auto_schema(method='put', request_body=TaxSerializer, responses={200: TaxSerializer}, tags=['Tax'])
 @api_view(['PUT'])
 def update_tax(request, pk):
     try:
@@ -362,7 +362,7 @@ def update_tax(request, pk):
             return Response(serializer.data, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-@swagger_auto_schema(method='patch', request_body=TaxSerializer, responses={200: TaxSerializer})
+@swagger_auto_schema(method='patch', request_body=TaxSerializer, responses={200: TaxSerializer}, tags=['Tax'])
 @api_view(['PATCH'])
 def partial_update_tax(request, pk):
     try:
@@ -377,7 +377,7 @@ def partial_update_tax(request, pk):
             return Response(serializer.data, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-@swagger_auto_schema(method='delete', responses={204: 'No Content'})
+@swagger_auto_schema(method='delete', responses={204: 'No Content'}, tags=['Tax'])
 @api_view(['DELETE'])
 def delete_tax(request, pk):
     try:
@@ -390,9 +390,41 @@ def delete_tax(request, pk):
 
 # Login
 
+# Login API
+@swagger_auto_schema(
+    method='post',
+    request_body=openapi.Schema(
+        type=openapi.TYPE_OBJECT,
+        properties={
+            'username': openapi.Schema(type=openapi.TYPE_STRING, description='Username of the user'),
+            'password': openapi.Schema(type=openapi.TYPE_STRING, description='Password of the user')
+        }
+    ),
+    responses={
+        200: openapi.Response(
+            description="Successful login",
+            schema=openapi.Schema(
+                type=openapi.TYPE_OBJECT,
+                properties={
+                    'token': openapi.Schema(type=openapi.TYPE_STRING, description='Authentication token')
+                }
+            )
+        ),
+        400: openapi.Response(
+            description="Invalid username or password",
+            schema=openapi.Schema(
+                type=openapi.TYPE_OBJECT,
+                properties={
+                    'error': openapi.Schema(type=openapi.TYPE_STRING, description='Error message')
+                }
+            )
+        )
+    },
+    tags=['Authentication']
+)
 @api_view(['POST'])
-@permission_classes([])
-@authentication_classes([])
+@permission_classes([])  # Comentar o modificar según sea necesario para producción
+@authentication_classes([])  # Comentar o modificar según sea necesario para producción
 def login(request):
     if request.method == 'POST':
         form = AuthenticationForm(data=request.data)
