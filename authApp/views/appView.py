@@ -15,6 +15,7 @@ from authApp.serializers.footprintSerializer import FootprintSerializer
 from authApp.serializers.priceSerializer import PriceSerializer
 from authApp.serializers.discountSerializer import DiscountSerializer
 from authApp.serializers.taxSerializer import TaxSerializer
+
 from rest_framework.authtoken.models import Token # comentar par deshabilitar seguridad
 from django.contrib.auth.forms import AuthenticationForm # comentar par deshabilitar seguridad
 from django.contrib.auth import login as auth_login # comentar par deshabilitar seguridad
@@ -388,9 +389,8 @@ def delete_tax(request, pk):
         tax.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
-# Login
-
 # Login API
+
 @swagger_auto_schema(
     method='post',
     request_body=openapi.Schema(

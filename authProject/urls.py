@@ -9,7 +9,7 @@ from authApp.views import businessModelView
 from rest_framework import permissions
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
-from rest_framework.authentication import TokenAuthentication  # Agrega esta línea
+from rest_framework.authentication import TokenAuthentication
 
 schema_view = get_schema_view(
     openapi.Info(
@@ -32,7 +32,7 @@ urlpatterns = [
     path('show-products/', appView.show_products, name='List all created products'),
     path('create-product/', appView.create_product, name='Create a new product'),
     path('update-product/<int:pk>/', appView.update_product, name='Update a selected product'),
-    path('patial-update-product/<int:pk>/', appView.partial_update_product, name='Update a selected attribute for an product'),
+    path('patial-update-product/<int:pk>/', appView.partial_update_product, name='Update a selected attribute for a product'),
     path('delete-product/<int:pk>/', appView.delete_product, name='Delete a selected product'),
     path('show-product-prices/<int:pk>/', appView.show_product_prices, name='List all prices by products'),
     path('show-product-footprint/<int:pk>/', appView.show_product_footprint, name='List all footprints by products'),
@@ -40,38 +40,38 @@ urlpatterns = [
     path('show-product-taxes/<int:pk>/', appView.show_product_taxes, name='List all taxes by products'),
 
     # footprint urls
-    path('show-footprints/', appView.show_footprints),
-    path('create-footprint/', appView.create_footprint),
-    path('update-footprint/<int:pk>/', appView.update_footprint),
-    path('partial-update-footprint/<int:pk>/', appView.partial_update_footprint),
-    path('delete-footprint/<int:pk>/', appView.delete_footprint),
+    path('show-footprints/', appView.show_footprints, name='List all created footprints'),
+    path('create-footprint/', appView.create_footprint, name='Create a new footprint'),
+    path('update-footprint/<int:pk>/', appView.update_footprint, name='Update a selected footprint'),
+    path('partial-update-footprint/<int:pk>/', appView.partial_update_footprint, name='Update a selected attribute for a footprint'),
+    path('delete-footprint/<int:pk>/', appView.delete_footprint, name='Delete a selected footprint'),
 
     # price urls
-    path('show-prices/', appView.show_prices),
-    path('create-price/', appView.create_price),
-    path('update-price/<int:pk>/', appView.update_price),
-    path('partial-update-price/<int:pk>/', appView.partial_update_price),
-    path('delete-price/<int:pk>/', appView.delete_price),
+    path('show-prices/', appView.show_prices, name='List all created prices'),
+    path('create-price/', appView.create_price, name='Create a new price'),
+    path('update-price/<int:pk>/', appView.update_price, name='Update a selected price'),
+    path('partial-update-price/<int:pk>/', appView.partial_update_price, name='Update a selected attribute for a price'),
+    path('delete-price/<int:pk>/', appView.delete_price, name='Delete a selected price'),
 
     # Discount urls
-    path('show-discounts/', appView.show_discounts),
-    path('create-discount/', appView.create_discount),
-    path('update-discount/<int:pk>/', appView.update_discount),
-    path('partial-update-discount/<int:pk>/', appView.partial_update_discount),
-    path('delete-discount/<int:pk>/', appView.delete_discount),
+    path('show-discounts/', appView.show_discounts, name='List all created discounts'),
+    path('create-discount/', appView.create_discount, name='Create a new discount'),
+    path('update-discount/<int:pk>/', appView.update_discount, name='Update a selected discount'),
+    path('partial-update-discount/<int:pk>/', appView.partial_update_discount, name='Update a selected attribute for a discount'),
+    path('delete-discount/<int:pk>/', appView.delete_discount, name='Delete a selected discount'),
 
     # Tax urls
-    path('show-taxes/', appView.show_taxes),
-    path('create-tax/', appView.create_tax),
-    path('update-tax/<int:pk>/', appView.update_tax),
-    path('partial-update-tax/<int:pk>/', appView.partial_update_tax),
-    path('delete-tax/<int:pk>/', appView.delete_tax),
+    path('show-taxes/', appView.show_taxes, name='List all created taxes'),
+    path('create-tax/', appView.create_tax, name='Create a new tax'),
+    path('update-tax/<int:pk>/', appView.update_tax, name='Update a selected tax'),
+    path('partial-update-tax/<int:pk>/', appView.partial_update_tax, name='Update a selected attribute for an tax'),
+    path('delete-tax/<int:pk>/', appView.delete_tax, name='Delete a selected tax'),
 
     # Business Model url
-    path('field-structure-view/', businessModelView.field_structure_view),
+    path('field-structure-view/', businessModelView.field_structure_view, name='Generate a json structure for all models'),
 
     # token
-    path('generate_token/', views.obtain_auth_token),
+    path('generate_token/', views.obtain_auth_token, ),
 
     #login
     path('login/', appView.login),
