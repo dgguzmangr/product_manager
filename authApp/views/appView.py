@@ -24,6 +24,8 @@ from django.contrib.auth import login as auth_login # comentar par deshabilitar 
 
 @swagger_auto_schema(method='get', responses={200: ProductSerializer(many=True)} , tags=['Product'])
 @api_view(['GET'])
+@permission_classes([])  # Comentar o modificar según sea necesario para producción
+@authentication_classes([])  # Comentar o modificar según sea necesario para producción
 def show_products(request):
     if request.method == 'GET':
         product = Product.objects.all()
@@ -32,6 +34,8 @@ def show_products(request):
 
 @swagger_auto_schema(method='post', request_body=ProductSerializer, responses={201: ProductSerializer}, tags=['Product'])
 @api_view(['POST'])
+@permission_classes([])  # Comentar o modificar según sea necesario para producción
+@authentication_classes([])  # Comentar o modificar según sea necesario para producción
 def create_product(request):
     if request.method == 'POST':
         serializer = ProductSerializer(data=request.data)
@@ -42,6 +46,8 @@ def create_product(request):
 
 @swagger_auto_schema(method='put', request_body=ProductSerializer, responses={200: ProductSerializer}, tags=['Product'])
 @api_view(['PUT'])
+@permission_classes([])  # Comentar o modificar según sea necesario para producción
+@authentication_classes([])  # Comentar o modificar según sea necesario para producción
 def update_product(request, pk):
     try:
         product = Product.objects.get(pk=pk)
@@ -57,6 +63,8 @@ def update_product(request, pk):
 
 @swagger_auto_schema(method='patch', request_body=ProductSerializer, responses={200: ProductSerializer}, tags=['Product'])
 @api_view(['PATCH'])
+@permission_classes([])  # Comentar o modificar según sea necesario para producción
+@authentication_classes([])  # Comentar o modificar según sea necesario para producción
 def partial_update_product(request, pk):
     try:
         product = Product.objects.get(pk=pk)
@@ -72,6 +80,8 @@ def partial_update_product(request, pk):
 
 @swagger_auto_schema(method='delete', responses={204: 'No Content'}, tags=['Product'])
 @api_view(['DELETE'])
+@permission_classes([])  # Comentar o modificar según sea necesario para producción
+@authentication_classes([])  # Comentar o modificar según sea necesario para producción
 def delete_product(request, pk):
     try:
         product = Product.objects.get(pk=pk)
@@ -83,6 +93,8 @@ def delete_product(request, pk):
 
 @swagger_auto_schema(method='get', responses={200: PriceSerializer(many=True)}, tags=['Product'])
 @api_view(['GET'])
+@permission_classes([])  # Comentar o modificar según sea necesario para producción
+@authentication_classes([])  # Comentar o modificar según sea necesario para producción
 def show_product_prices(request, pk):
     try:
         product = Product.objects.get(pk=pk)
@@ -94,6 +106,8 @@ def show_product_prices(request, pk):
 
 @swagger_auto_schema(method='get', responses={200: FootprintSerializer}, tags=['Product'])
 @api_view(['GET'])
+@permission_classes([])  # Comentar o modificar según sea necesario para producción
+@authentication_classes([])  # Comentar o modificar según sea necesario para producción
 def show_product_footprint(request, pk):
     try:
         product = Product.objects.get(pk=pk)
@@ -110,6 +124,8 @@ def show_product_footprint(request, pk):
 
 @swagger_auto_schema(method='get', responses={200: DiscountSerializer(many=True)}, tags=['Product'])
 @api_view(['GET'])
+@permission_classes([])  # Comentar o modificar según sea necesario para producción
+@authentication_classes([])  # Comentar o modificar según sea necesario para producción
 def show_product_discounts(request, pk):
     try:
         product = Product.objects.get(pk=pk)
@@ -122,6 +138,8 @@ def show_product_discounts(request, pk):
 
 @swagger_auto_schema(method='get', responses={200: TaxSerializer(many=True)}, tags=['Product'])
 @api_view(['GET'])
+@permission_classes([])  # Comentar o modificar según sea necesario para producción
+@authentication_classes([])  # Comentar o modificar según sea necesario para producción
 def show_product_taxes(request, pk):
     try:
         product = Product.objects.get(pk=pk)
@@ -136,6 +154,8 @@ def show_product_taxes(request, pk):
 
 @swagger_auto_schema(method='get', responses={200: FootprintSerializer(many=True)}, tags=['Footprint'])
 @api_view(['GET'])
+@permission_classes([])  # Comentar o modificar según sea necesario para producción
+@authentication_classes([])  # Comentar o modificar según sea necesario para producción
 def show_footprints(request):
     if request.method == 'GET':
         footprint = Footprint.objects.all()
@@ -144,6 +164,8 @@ def show_footprints(request):
 
 @swagger_auto_schema(method='post', request_body=FootprintSerializer, responses={201: FootprintSerializer}, tags=['Footprint'])
 @api_view(['POST'])
+@permission_classes([])  # Comentar o modificar según sea necesario para producción
+@authentication_classes([])  # Comentar o modificar según sea necesario para producción
 def create_footprint(request):
     if request.method == 'POST':
         serializer = FootprintSerializer(data=request.data)
@@ -154,6 +176,8 @@ def create_footprint(request):
 
 @swagger_auto_schema(method='put', request_body=FootprintSerializer, responses={200: FootprintSerializer}, tags=['Footprint'])
 @api_view(['PUT'])
+@permission_classes([])  # Comentar o modificar según sea necesario para producción
+@authentication_classes([])  # Comentar o modificar según sea necesario para producción
 def update_footprint(request, pk):
     try:
         footprint = Footprint.objects.get(pk=pk)
@@ -169,6 +193,8 @@ def update_footprint(request, pk):
 
 @swagger_auto_schema(method='patch', request_body=FootprintSerializer, responses={200: FootprintSerializer}, tags=['Footprint'])
 @api_view(['PATCH'])
+@permission_classes([])  # Comentar o modificar según sea necesario para producción
+@authentication_classes([])  # Comentar o modificar según sea necesario para producción
 def partial_update_footprint(request, pk):
     try:
         footprint = Footprint.objects.get(pk=pk)
@@ -184,6 +210,8 @@ def partial_update_footprint(request, pk):
 
 @swagger_auto_schema(method='delete', responses={204: 'No Content'}, tags=['Footprint'])
 @api_view(['DELETE'])
+@permission_classes([])  # Comentar o modificar según sea necesario para producción
+@authentication_classes([])  # Comentar o modificar según sea necesario para producción
 def delete_footprint(request, pk):
     try:
         footprint = Footprint.objects.get(pk=pk)
@@ -197,6 +225,8 @@ def delete_footprint(request, pk):
 
 @swagger_auto_schema(method='get', responses={200: PriceSerializer(many=True)}, tags=['Price'])
 @api_view(['GET'])
+@permission_classes([])  # Comentar o modificar según sea necesario para producción
+@authentication_classes([])  # Comentar o modificar según sea necesario para producción
 def show_prices(request):
     if request.method == 'GET':
         price = Price.objects.all()
@@ -206,21 +236,19 @@ def show_prices(request):
 @swagger_auto_schema(method='post', request_body=openapi.Schema(
     type=openapi.TYPE_OBJECT,
     properties={
-        'amount': openapi.Schema(type=openapi.TYPE_STRING, description='Amount in string format'),
-        'currency': openapi.Schema(type=openapi.TYPE_STRING, description='Currency code'),
-        'status': openapi.Schema(type=openapi.TYPE_STRING, description='Status of the price')
+        'amount': openapi.Schema(type=openapi.TYPE_OBJECT, properties={
+            'amount': openapi.Schema(type=openapi.TYPE_NUMBER, description='Amount value'),
+            'currency': openapi.Schema(type=openapi.TYPE_STRING, description='Currency code')
+        }),
+        'status': openapi.Schema(type=openapi.TYPE_BOOLEAN, description='Status of the price')
     }
 ), responses={201: PriceSerializer}, tags=['Price'])
 @api_view(['POST'])
+@permission_classes([])  # Comentar o modificar según sea necesario para producción
+@authentication_classes([])  # Comentar o modificar según sea necesario para producción
 def create_price(request):
     if request.method == 'POST':
-        data = request.data
-        amount = Money(data.get('amount'), data.get('currency'))
-        price_data = {
-            'amount': amount,
-            'status': data.get('status')
-        }
-        serializer = PriceSerializer(data=price_data)
+        serializer = PriceSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -228,6 +256,8 @@ def create_price(request):
 
 @swagger_auto_schema(method='put', request_body=PriceSerializer, responses={200: PriceSerializer}, tags=['Price'])
 @api_view(['PUT'])
+@permission_classes([])  # Comentar o modificar según sea necesario para producción
+@authentication_classes([])  # Comentar o modificar según sea necesario para producción
 def update_price(request, pk):
     try:
         price = Price.objects.get(pk=pk)
@@ -243,6 +273,8 @@ def update_price(request, pk):
 
 @swagger_auto_schema(method='patch', request_body=PriceSerializer, responses={200: PriceSerializer}, tags=['Price'])
 @api_view(['PATCH'])
+@permission_classes([])  # Comentar o modificar según sea necesario para producción
+@authentication_classes([])  # Comentar o modificar según sea necesario para producción
 def partial_update_price(request, pk):
     try:
         price = Price.objects.get(pk=pk)
@@ -258,6 +290,8 @@ def partial_update_price(request, pk):
 
 @swagger_auto_schema(method='delete', responses={204: 'No Content'}, tags=['Price'])
 @api_view(['DELETE'])
+@permission_classes([])  # Comentar o modificar según sea necesario para producción
+@authentication_classes([])  # Comentar o modificar según sea necesario para producción
 def delete_price(request, pk):
     try:
         price = Price.objects.get(pk=pk)
@@ -271,6 +305,8 @@ def delete_price(request, pk):
 
 @swagger_auto_schema(method='get', responses={200: DiscountSerializer(many=True)}, tags=['Discount'])
 @api_view(['GET'])
+@permission_classes([])  # Comentar o modificar según sea necesario para producción
+@authentication_classes([])  # Comentar o modificar según sea necesario para producción
 def show_discounts(request):
     if request.method == 'GET':
         discount = Discount.objects.all()
@@ -279,6 +315,8 @@ def show_discounts(request):
 
 @swagger_auto_schema(method='post', request_body=DiscountSerializer, responses={201: DiscountSerializer}, tags=['Discount'])
 @api_view(['POST'])
+@permission_classes([])  # Comentar o modificar según sea necesario para producción
+@authentication_classes([])  # Comentar o modificar según sea necesario para producción
 def create_discount(request):
     if request.method == 'POST':
         serializer = DiscountSerializer(data=request.data)
@@ -289,6 +327,8 @@ def create_discount(request):
 
 @swagger_auto_schema(method='put', request_body=DiscountSerializer, responses={200: DiscountSerializer}, tags=['Discount'])
 @api_view(['PUT'])
+@permission_classes([])  # Comentar o modificar según sea necesario para producción
+@authentication_classes([])  # Comentar o modificar según sea necesario para producción
 def update_discount(request, pk):
     try:
         discount = Discount.objects.get(pk=pk)
@@ -304,6 +344,8 @@ def update_discount(request, pk):
 
 @swagger_auto_schema(method='patch', request_body=DiscountSerializer, responses={200: DiscountSerializer}, tags=['Discount'])
 @api_view(['PATCH'])
+@permission_classes([])  # Comentar o modificar según sea necesario para producción
+@authentication_classes([])  # Comentar o modificar según sea necesario para producción
 def partial_update_discount(request, pk):
     try:
         discount = Discount.objects.get(pk=pk)
@@ -319,6 +361,8 @@ def partial_update_discount(request, pk):
 
 @swagger_auto_schema(method='delete', responses={204: 'No Content'}, tags=['Discount'])
 @api_view(['DELETE'])
+@permission_classes([])  # Comentar o modificar según sea necesario para producción
+@authentication_classes([])  # Comentar o modificar según sea necesario para producción
 def delete_discount(request, pk):
     try:
         discount = Discount.objects.get(pk=pk)
@@ -332,6 +376,8 @@ def delete_discount(request, pk):
 
 @swagger_auto_schema(method='get', responses={200: TaxSerializer(many=True)}, tags=['Tax'])
 @api_view(['GET'])
+@permission_classes([])  # Comentar o modificar según sea necesario para producción
+@authentication_classes([])  # Comentar o modificar según sea necesario para producción
 def show_taxes(request):
     if request.method == 'GET':
         tax = Tax.objects.all()
@@ -340,6 +386,8 @@ def show_taxes(request):
 
 @swagger_auto_schema(method='post', request_body=TaxSerializer, responses={201: TaxSerializer}, tags=['Tax'])
 @api_view(['POST'])
+@permission_classes([])  # Comentar o modificar según sea necesario para producción
+@authentication_classes([])  # Comentar o modificar según sea necesario para producción
 def create_tax(request):
     if request.method == 'POST':
         serializer = TaxSerializer(data=request.data)
@@ -350,6 +398,8 @@ def create_tax(request):
 
 @swagger_auto_schema(method='put', request_body=TaxSerializer, responses={200: TaxSerializer}, tags=['Tax'])
 @api_view(['PUT'])
+@permission_classes([])  # Comentar o modificar según sea necesario para producción
+@authentication_classes([])  # Comentar o modificar según sea necesario para producción
 def update_tax(request, pk):
     try:
         tax = Tax.objects.get(pk=pk)
@@ -365,6 +415,8 @@ def update_tax(request, pk):
 
 @swagger_auto_schema(method='patch', request_body=TaxSerializer, responses={200: TaxSerializer}, tags=['Tax'])
 @api_view(['PATCH'])
+@permission_classes([])  # Comentar o modificar según sea necesario para producción
+@authentication_classes([])  # Comentar o modificar según sea necesario para producción
 def partial_update_tax(request, pk):
     try:
         tax = Tax.objects.get(pk=pk)
@@ -380,6 +432,8 @@ def partial_update_tax(request, pk):
 
 @swagger_auto_schema(method='delete', responses={204: 'No Content'}, tags=['Tax'])
 @api_view(['DELETE'])
+@permission_classes([])  # Comentar o modificar según sea necesario para producción
+@authentication_classes([])  # Comentar o modificar según sea necesario para producción
 def delete_tax(request, pk):
     try:
         tax = Tax.objects.get(pk=pk)
