@@ -1,4 +1,6 @@
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, permission_classes, authentication_classes
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.authentication import TokenAuthentication
 from rest_framework.response import Response
 from rest_framework import status
 from authApp.serializers import ProductSerializer, DiscountSerializer, FootprintSerializer, PriceSerializer, TaxSerializer
@@ -7,6 +9,7 @@ from django.contrib.auth.forms import AuthenticationForm  # comentar para deshab
 from django.contrib.auth import login as auth_login  # comentar para deshabilitar seguridad
 from drf_yasg.utils import swagger_auto_schema
 from drf_yasg import openapi
+
 
 @swagger_auto_schema(method='get', responses={200: openapi.Response('Field structure', openapi.Schema(
     type=openapi.TYPE_OBJECT,
@@ -19,7 +22,9 @@ from drf_yasg import openapi
     }
 ))}, tags=['Field structure view'])
 @api_view(['GET'])
-def field_structure_view(request):
+@permission_classes([])  # Ajustar según sea necesario
+@authentication_classes([])  # Ajustar según sea necesario
+def products_field_structure_view(request):
     product_serializer = ProductSerializer()
     discount_serializer = DiscountSerializer()
     footprint_serializer = FootprintSerializer()

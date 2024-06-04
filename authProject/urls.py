@@ -68,7 +68,7 @@ urlpatterns = [
     path('delete-tax/<int:pk>/', appView.delete_tax, name='Delete a selected tax'),
 
     # Business Model url
-    path('field-structure-view/', businessModelView.field_structure_view, name='Generate a json structure for all models'),
+    path('products-manager-field-structure/', businessModelView.products_field_structure_view, name='Generate a json structure for all models'),
 
     # token
     path('generate_token/', views.obtain_auth_token, ),
