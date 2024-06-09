@@ -44,6 +44,29 @@ def create_product(request):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+"""
+@swagger_auto_schema(method='post', request_body=ProductSerializer, responses={201: ProductSerializer}, tags=['Product'])
+@api_view(['POST'])
+@permission_classes([])  # Comentar o modificar según sea necesario para producción
+@authentication_classes([])  # Comentar o modificar según sea necesario para producción
+def create_product(request):
+    if request.method == 'POST':
+        serializer = ProductSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            product = serializer.data
+            
+            # Actualizar el user en el microservicio de usuarios
+            user_id = product['user_id']
+            product_id = product['id']
+            user_update_url = f'http://localhost:8000/api/users/{user_id}/add_product/'
+            requests.post(user_update_url, json={'product_id': product_id})
+
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+"""
+
+
 @swagger_auto_schema(method='put', request_body=ProductSerializer, responses={200: ProductSerializer}, tags=['Product'])
 @api_view(['PUT'])
 @permission_classes([])  # Comentar o modificar según sea necesario para producción
@@ -61,6 +84,25 @@ def update_product(request, pk):
             return Response(serializer.data, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+"""
+@swagger_auto_schema(method='put', request_body=ProductSerializer, responses={200: ProductSerializer}, tags=['Product'])
+@api_view(['PUT'])
+@permission_classes([])  # Comentar o modificar según sea necesario para producción
+@authentication_classes([])  # Comentar o modificar según sea necesario para producción
+def update_product(request, pk):
+    try:
+        product = Product.objects.get(pk=pk)
+    except Product.DoesNotExist:
+        return Response({"error": "Product not found"}, status=status.HTTP_404_NOT_FOUND)
+
+    if request.method == 'PUT':
+        serializer = ProductSerializer(product, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+"""
+
 @swagger_auto_schema(method='patch', request_body=ProductSerializer, responses={200: ProductSerializer}, tags=['Product'])
 @api_view(['PATCH'])
 @permission_classes([])  # Comentar o modificar según sea necesario para producción
@@ -77,6 +119,26 @@ def partial_update_product(request, pk):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+"""
+@swagger_auto_schema(method='patch', request_body=ProductSerializer, responses={200: ProductSerializer}, tags=['Product'])
+@api_view(['PATCH'])
+@permission_classes([])  # Comentar o modificar según sea necesario para producción
+@authentication_classes([])  # Comentar o modificar según sea necesario para producción
+def partial_update_product(request, pk):
+    try:
+        product = Product.objects.get(pk=pk)
+    except Product.DoesNotExist:
+        return Response({"error": "Product not found"}, status=status.HTTP_404_NOT_FOUND)
+
+    if request.method == 'PATCH':
+        serializer = ProductSerializer(product, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+"""
 
 @swagger_auto_schema(method='delete', responses={204: 'No Content'}, tags=['Product'])
 @api_view(['DELETE'])
@@ -148,6 +210,19 @@ def show_product_taxes(request, pk):
 
     taxes = Tax.objects.filter(product=product)
     serializer = TaxSerializer(taxes, many=True)
+    return Response(serializer.data, status=status.HTTP_200_OK)
+
+@swagger_auto_schema(method='get', responses={200: ProductSerializer}, tags=['Product'])
+@api_view(['GET'])
+@permission_classes([])  # Ajustar según sea necesario
+@authentication_classes([])  # Ajustar según sea necesario
+def product_detail(request, pk):
+    try:
+        user = Product.objects.get(pk=pk)
+    except Product.DoesNotExist:
+        return Response({'error': 'Product not found'}, status=status.HTTP_404_NOT_FOUND)
+    
+    serializer = ProductSerializer(user)
     return Response(serializer.data, status=status.HTTP_200_OK)
 
 # Footprint API

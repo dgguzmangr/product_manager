@@ -38,6 +38,7 @@ urlpatterns = [
     path('show-product-footprint/<int:pk>/', appView.show_product_footprint, name='List all footprints by products'),
     path('show-product-discounts/<int:pk>/', appView.show_product_discounts, name='List all discounts by products'),
     path('show-product-taxes/<int:pk>/', appView.show_product_taxes, name='List all taxes by products'),
+    path('product-detail/<int:pk>/', appView.product_detail, name='Show product detalis'),
 
     # footprint urls
     path('show-footprints/', appView.show_footprints, name='List all created footprints'),
