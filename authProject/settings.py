@@ -135,6 +135,21 @@ WSGI_APPLICATION = 'authProject.wsgi.application'
 
 DATABASES = {
     'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': config('PGDATABASE'),
+        'USER': config('PGUSER'),
+        'PASSWORD': config('PGPASSWORD'),
+        'HOST': config('PGHOST'),
+        'PORT': config('PGPORT', 5432),
+        'OPTIONS': {
+            'sslmode': 'require',
+        },
+    }
+}
+
+"""
+DATABASES = {
+    'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': config('db_name'),
         'USER': config('user_db'),
@@ -143,7 +158,7 @@ DATABASES = {
         'PORT': config('db_port'),
     }
 }
-
+"""
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
