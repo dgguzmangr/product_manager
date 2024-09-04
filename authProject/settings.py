@@ -32,7 +32,8 @@ SECRET_KEY = config('secret_key')
 DEBUG = config('DEBUG')
 
 ALLOWED_HOSTS = [
-    '*'
+     # '*'
+     '.vercel.app'
 ]
 
 CORS_ALLOWED_ORIGINS = [
