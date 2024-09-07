@@ -32,7 +32,7 @@ SECRET_KEY = config('secret_key')
 DEBUG = config('DEBUG')
 
 ALLOWED_HOSTS = [
-    'localhost',
+    '*',
     '.vercel.app'
 ]
 
