@@ -18,8 +18,8 @@
             "dest": "/static/$1"
         },
         {
-            "src": "/(.*)",
-            "dest": "wsgi.py"
+            "src": "/media/(.*)",
+            "dest": "/media/$1"
         }
     ]
 }

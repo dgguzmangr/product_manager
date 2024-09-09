@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+  product_manager:
+    build:
+      context: ./product_manager
+    ports:
+      - "8002:8002"
+    environment:
+      - DEBUG=True
+    volumes:
+      - ./product_manager:/app # Aquí montas el directorio local
