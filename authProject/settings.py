@@ -137,7 +137,7 @@ WSGI_APPLICATION = 'authProject.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
+        'ENGINE': config('PGENGINE'),
         'NAME': config('PGDATABASE'),
         'USER': config('PGUSER'),
         'PASSWORD': config('PGPASSWORD'),
